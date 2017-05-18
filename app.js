@@ -93,11 +93,24 @@ function doQuiz() {
 var quiz = init();
 var qaObj = quiz.getQuestionAnswer();
 
-$(document).ready(function(){
+$(document).ready( function(){
+
     writeQandA(qaObj);
 });
 
+$(".answer-form").on('submit', function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    if ($('input:radio', this).is(':checked')) {
+         //console.log("selected"); 
+        } else {
+        alert('Please select something!');
+        return false;}
+    //var buttonName = $(event.currentTarget.closest('li')).attr(itemDataAttr);
+    var buttonID = $('input[name="aButton"]:checked').attr("id");
+    console.log(buttonID);
 
+    });
 
   /* $('button.next-button').on('click', function(event) {
     event.preventDefault();
