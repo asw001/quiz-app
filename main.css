@@ -16,6 +16,7 @@ header {
 	border: 5px solid lightgray;
 	height: 500px;
 	text-align: center;
+	position: relative;
 }
 
 h1 {
@@ -32,6 +33,13 @@ h1 {
 .control-button, .answer-button {
 	margin-top: : 20px;
 	text-align: center;
+}
+
+.control-button {
+    position: absolute;
+    left: 180px;
+    bottom: 20px;
+
 }
 
 .answer-panel {

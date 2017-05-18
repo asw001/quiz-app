@@ -80,12 +80,6 @@ function init() {
     var qAs = getQAs(questionNumbers, questionAndAnswers)
     var myQuiz = new makeQuiz(questionNumbers, qAs);
     return myQuiz;
-    //var currentQA = myQuiz.getNextQuestion();
-     //console.log(currentQA.question);
-    //console.log(myQuiz.getNextQuestion());   
-    // $(document).ready(function(){
-     //   $(".question-section > span").html(currentQA.question);
-    //});
 };
 
 function doQuiz() {
