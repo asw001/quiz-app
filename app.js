@@ -69,7 +69,8 @@ function writeQandA(qaObj) {
 
 }*/
 
-function handleAnswer() {
+function handleAnswer(currentQA, quiz) {
+
       $("#answer-form").on("submit", function(event) {
         event.stopPropagation();
         event.preventDefault();
@@ -82,13 +83,16 @@ function handleAnswer() {
          var buttonID = $('input[name="aButton"]:checked').attr("id");
          console.log(buttonID);
          $("#answer-form").find(':input:not(:disabled)').prop('disabled',true);
-    });
+    }); 
 };
 
-function handleQuestion(currentQA) {
+function handleQuestion(quiz) {
+    
     $("div.control-button").on("click", "button.next-button", function() {
+        var currentQA = quiz.getQuestionAnswer();
         writeQandA(currentQA);
         //$("#answer-form").find(':input:disabled').prop('disabled',false);
+        return currentQA;
     });
 };
 
@@ -101,11 +105,11 @@ function init() {
 };
 
 
-function handleGetNextQuestionAndAnswers(quizObj) {
-    var currentQA = quizObj.getQuestionAnswer();
+function handleGetNextQuestionAndAnswers(quiz) {
+    //var currentQA = quizObj.getQuestionAnswer();
     
-    handleQuestion(currentQA);
-    handleAnswer();
+    var currentQA = handleQuestion(quiz);
+    handleAnswer(currentQA, quiz);
 };
 
 
