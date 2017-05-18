@@ -13,35 +13,37 @@
 
 	<div class="row">
 		<div class="col-12">
-			<h1>Quiz App</h1></div>
+			<h1>Quiz App</h1>
+		</div>
 			<div class="col-6">
 				<div class="question-panel">
 					<h2>Test Your Trivia</h2>
                     <div class="question-section"><span></span></div>
-					</div>
-					<div class="control-button">
+                    <div class="control-button">
 						<!--<button type="submit">Submit Answer</button>-->
 						<button class="next-button" type="submit">Next</button>
 					</div>
-				</div>
-				<div class="col-3">	
-					<div class="answer-panel">
-						<h2>Answer Here</h2>
-						<div class="answer-choices">
-						<div><input type="radio">  A</button><br></div>
-						<div><input type="radio">  B</button><br></div>
-						<div><input type="radio">  C</button><br></div>
-						<div><input type="radio">  D</button></div>
-						</div>
 					</div>
 					
-					<div class="answer-button">
-						<button type="submit">Enter</button>
-					</div>	
-					</div>
-				<div class="col-3">	
-					<div class="score-panel">
-						<h2>Score</h2>
+				</div>
+		<div class="col-3">	
+		<div class="answer-panel">
+             <h2>Answer Here</h2>
+             <div class="answer-choices">
+             <form class='answer-form' action="/some-server-endpoint" method='post'>
+                <div class="radio-button"><input type="radio" name="buttonA" id="A">  A<br></div>
+                <div class="radio-button"><input type="radio" name="buttonB" id="B">  B<br></div>
+                <div class="radio-button"><input type="radio" name="buttonC" id="C">  C<br></div>
+		        <div class="radio-button"><input type="radio" name="buttonD" id="D">  D<br></div>
+		        <div class="answer-button">
+                <button type='submit'>Enter</button> </div>	
+            </form>
+            </div>
+       </div>
+       </div>
+       <div class="col-3">
+		<div class="score-panel">
+			 <h2>Score</h2>
 				</div>		       
 			</div>
 			<script src="https://code.jquery.com/jquery-3.1.0.js"></script>

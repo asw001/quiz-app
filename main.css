@@ -4,13 +4,13 @@ main {
 
 header {
 	background-color: #eebb44;
-	margin-bottom: 40px;
+	/*margin-bottom: 40px;*/
 }
 
-div	{
+/*div	{
 
 	display: block;
-}
+}*/
 
 .question-panel {
 	border: 5px solid lightgray;
@@ -23,6 +23,7 @@ h1 {
 	text-align: center;
 }
 .question-section {
+	margin: 20px;
 	font-size: 20px;
     text-align: left;
     padding: 10px;
@@ -35,15 +36,22 @@ h1 {
 
 .answer-panel {
 	border: 5px solid lightgray;
-	height: 200px;
+	height: 250px;
 	text-align: center;
 }
 
-.answer-choices > div {
+.radio-button {
 border: 3px solid lightgray;
 margin: 3px;
 position: relative;
+margin-bottom: 10px;
 }
+
+/*input[type=radio] {
+border: 3px solid lightgray;
+margin: 3px;
+position: relative;
+}*/
 
 .correctChoice {
 background-color: green;
