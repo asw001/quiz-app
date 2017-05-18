@@ -45,6 +45,16 @@ margin: 3px;
 position: relative;
 }
 
+.correctChoice {
+background-color: green;
+
+}
+
+.incorrectChoice {
+background-color: red;
+
+}
+
 .score-panel {
     border: 5px solid lightgray;
 	height: 100px;
