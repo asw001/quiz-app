@@ -73,7 +73,12 @@ function handleAnswer(quiz) {
            return false;}
 
          var buttonID = $('input[name="aButton"]:checked').attr("id");
-         console.log(buttonID);
+
+         if (buttonID === quiz.currentQuestion["answerKey"]) {
+         console.log("answer correct"); }
+         else {
+            console.log("nope");
+         }
          $("#answer-form").find(':input:not(:disabled)').prop('disabled',true);
     }); 
 };
