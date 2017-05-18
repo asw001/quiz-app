@@ -1,0 +1,53 @@
+main {
+	padding-top: 100px;
+}
+
+header {
+	background-color: #eebb44;
+	margin-bottom: 40px;
+}
+
+div	{
+
+	display: block;
+}
+
+.question-panel {
+	border: 5px solid lightgray;
+	height: 500px;
+	text-align: center;
+}
+
+h1 {
+
+	text-align: center;
+}
+.question-section {
+	font-size: 20px;
+    text-align: left;
+    padding: 10px;
+}
+
+.control-button, .answer-button {
+	margin-top: : 20px;
+	text-align: center;
+}
+
+.answer-panel {
+	border: 5px solid lightgray;
+	height: 200px;
+	text-align: center;
+}
+
+.answer-choices > div {
+border: 3px solid lightgray;
+margin: 3px;
+position: relative;
+}
+
+.score-panel {
+    border: 5px solid lightgray;
+	height: 100px;
+	text-align: center;
+
+}
