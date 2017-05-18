@@ -85,8 +85,9 @@ $(document).ready( function(){
     writeQandA(qaObj);
 });
 
-//$("#answer-form :input").prop("enabled", false);
  $("#answer-form").find(':input:not(:disabled)').prop('disabled',true)//disable forum until next question
+ $("#answer-form").find(':input:disabled').prop('disabled',false)//disable forum until next question
+
 
 $("#answer-form").on("submit", function(event) {
     event.stopPropagation();
