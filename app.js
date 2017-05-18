@@ -22,17 +22,25 @@ var getQAs = function(questionNumbers, questionAndAnswers) {
     };
 
 function makeQuiz (questionNumbers, qAs) {
-    this.numberQuestions = questionNumbers.length;
+    this.questionsTotal = questionNumbers.length;
     this.numberCorrect = 0;
+    this.questionsAnswered = 0;
+    
+    this.setQuestionsAnswered = function () {
+        this.questionsAnswered++;
+    };
+    this.getQuestionsAnswered = function () {
+        return this.questionsAnswered;
+    };
     this.getQuestionTotal = function () {
-        return this.numberQuestions;
+        return this.questionsTotal;
     };
 
     this.qa = getQAs(questionNumbers, questionAndAnswers);
 
     this.getNextQuestion = function () {
         return this.qa.shift();
-        this.numberQuestions--;
+        this.setQuestionsAnswered();
     };
 
     this.addScore = function () {
@@ -47,26 +55,43 @@ function makeQuiz (questionNumbers, qAs) {
 function writeQandA(qaObject) {
   var answers = qaObject.answers;
   var answersProcessed = Object.keys(answers).map(function(key){
-    answer = '<p>' + key + ' ' + answers[key] + '</p>';
+    answer = '<p>' + key + ') ' + answers[key] + '</p>';
     return answer; });
   var qaHTML = '<p>' + qaObject.question + '</p>' + answersProcessed.join("\n");
   $(".question-section").html(qaHTML); // + "\n" + answers.join("\n"));
   //return answersProcessed;
 }
 
-function doQuiz() {
+function init() {
     
-    var questionCSS = ".question-section";
     var questionNumbers = getQuestionNumbers(5);
     var qAs = getQAs(questionNumbers, questionAndAnswers)
     var myQuiz = new makeQuiz(questionNumbers, qAs);
-    
-    var currentQA = myQuiz.getNextQuestion();
+    return myQuiz;
+    //var currentQA = myQuiz.getNextQuestion();
      //console.log(currentQA.question);
     //console.log(myQuiz.getNextQuestion());   
-     $(document).ready(function(){
+    // $(document).ready(function(){
         $(".question-section > span").html(currentQA.question);
-    });
+    //});
 };
+
+function doQuiz() {
+
+var quiz = init();
+
+
+   $('button.start-button').one('click', function(event) {
+    event.preventDefault();
+    var qaObj = quiz.getNextQuestion();
+    //addItem(state, $(event.currentTarget).find('input[name="shopping-list-entry"]').val());
+    //renderList(state, $('ul.shopping-list'));
+   writeQandA(qaObj);
+   //console.log(quiz.answers)
+  });
+
+
+}
+
 
 doQuiz();
