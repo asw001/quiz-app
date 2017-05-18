@@ -31,31 +31,21 @@ function makeQuiz (questionNumbers, qAs) {
     this.setAnswered = function () {
         this.answered++;
     };
-    this.getQuestionsAnswered = function () {
-        return this.answered;
-    };
-    this.getQuestionTotal = function () {
-        return this.questionsTotal;
-    };
+    this.currentQuestion = {};
 
-    this.getQuestionAnswer = function () {
-          return this.qa.shift();
-          this.setAnswered();
+    this.setCurrentQA = function () {
+        this.currentQuestion = this.qa.shift();
+        this.setAnswered();
     };
-    this.currentQuestion = this.getQuestionAnswer();
-
+    
     this.addScore = function () {
         this.correct++;
     };
+};
 
-    this.getScore = function () {
-        return this.numberCorrect;
-    };
-}
-
-function writeQandA(qaObj) {
-  var question = qaObj["question"];  
-  var answers = qaObj["answers"];
+function writeQandA(quiz) {
+  var question = quiz.currentQuestion["question"];  
+  var answers = quiz.currentQuestion["answers"];
   var answersProcessed = Object.keys(answers).map(function(key){
     answer = '<p>' + key + ') ' + answers[key] + '</p>';
     return answer; });
@@ -69,7 +59,7 @@ function writeQandA(qaObj) {
 
 }*/
 
-function handleAnswer(currentQA, quiz) {
+function handleAnswer(quiz) {
 
       $("#answer-form").on("submit", function(event) {
         event.stopPropagation();
@@ -88,12 +78,19 @@ function handleAnswer(currentQA, quiz) {
 
 function handleQuestion(quiz) {
     
+   if (quiz.getQuestionsAnswered() <= quiz.getQuestionTotal()) {
     $("div.control-button").on("click", "button.next-button", function() {
-        var currentQA = quiz.getQuestionAnswer();
-        writeQandA(currentQA);
+        //var currentQA = quiz.getQuestionAnswer();
+        writeQandA(quiz);
         //$("#answer-form").find(':input:disabled').prop('disabled',false);
-        return currentQA;
-    });
+        console.log("This is total" + quiz.getQuestionTotal());
+        console.log("This is answered" + quiz.getQuestionsAnswered());
+        //quiz.setAnswered();
+        //return currentQA;
+    }); }
+   else {
+        alert("No more questions. You can go now.");
+    };
 };
 
 
@@ -106,10 +103,8 @@ function init() {
 
 
 function handleGetNextQuestionAndAnswers(quiz) {
-    //var currentQA = quizObj.getQuestionAnswer();
-    
-    var currentQA = handleQuestion(quiz);
-    handleAnswer(currentQA, quiz);
+    handleQuestion(quiz);
+    handleAnswer(quiz);
 };
 
 
@@ -153,6 +148,8 @@ $("#answer-form").on("submit", function(event) {
    //console.log(quiz.answers)
   });*/
 
+//console.log(quiz.getQuestionsAnswered());
+//console.log(quiz.getQuestionTotal());
 handleGetNextQuestionAndAnswers(quiz);
 
 
