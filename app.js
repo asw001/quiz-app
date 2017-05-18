@@ -61,12 +61,37 @@ function writeQandA(qaObj) {
     return answer; });
   var qaHTML = '<p>' + question + '</p>' + answersProcessed.join("\n");
   $(".question-section").html(qaHTML); 
+  $("#answer-form").find(':input:disabled').prop('disabled',false);
 }
 
-function handleAnswer(qaObj) {
+/*function handleAnswer(qaObj) {
   var answerKey = qaObj['answerKey'];
 
-}
+}*/
+
+function handleAnswer() {
+      $("#answer-form").on("submit", function(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        
+        if ($("input:radio", this).is(':checked')) {
+           } else {
+           alert("Please select something!");
+           return false;}
+
+         var buttonID = $('input[name="aButton"]:checked').attr("id");
+         console.log(buttonID);
+         $("#answer-form").find(':input:not(:disabled)').prop('disabled',true);
+    });
+};
+
+function handleQuestion(currentQA) {
+    $("div.control-button").on("click", "button.next-button", function() {
+        writeQandA(currentQA);
+        //$("#answer-form").find(':input:disabled').prop('disabled',false);
+    });
+};
+
 
 function init() {
     var questionNumbers = getQuestionNumbers(5);
@@ -75,12 +100,22 @@ function init() {
     return myQuiz;
 };
 
+
+function handleGetNextQuestionAndAnswers(quizObj) {
+    var currentQA = quizObj.getQuestionAnswer();
+    
+    handleQuestion(currentQA);
+    handleAnswer();
+};
+
+
+
 function doQuiz() {
 
 var quiz = init();
-var qaObj = quiz.getQuestionAnswer();
+//var qaObj = quiz.getQuestionAnswer();
 
-$(document).ready( function(){
+/*$(document).ready( function(){
 
     writeQandA(qaObj);
 });
@@ -113,7 +148,10 @@ $("#answer-form").on("submit", function(event) {
    writeQandA(quiz);
    //console.log(quiz.answers)
   });*/
-}
 
+handleGetNextQuestionAndAnswers(quiz);
+
+
+};
 
 doQuiz();
