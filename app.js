@@ -60,20 +60,13 @@ function writeQandA(qaObj) {
     answer = '<p>' + key + ') ' + answers[key] + '</p>';
     return answer; });
   var qaHTML = '<p>' + question + '</p>' + answersProcessed.join("\n");
-  $(".question-section").html(qaHTML); // + "\n" + answers.join("\n"));
-  //return answersProcessed;
+  $(".question-section").html(qaHTML); 
 }
 
 function handleAnswer(qaObj) {
   var answerKey = qaObj['answerKey'];
 
 }
-
-/*function quizHandleQandA(quiz) {
-    var qaObj = quiz.getQuestionAnswer();
-    writeQandA(qaObj);
-    handleAnswer(qaObj);
-} */
 
 function init() {
     var questionNumbers = getQuestionNumbers(5);
@@ -92,19 +85,25 @@ $(document).ready( function(){
     writeQandA(qaObj);
 });
 
-$(".answer-form").on('submit', function(event) {
+//$("#answer-form :input").prop("enabled", false);
+ $("#answer-form").find(':input:not(:disabled)').prop('disabled',true)//disable forum until next question
+
+$("#answer-form").on("submit", function(event) {
     event.stopPropagation();
     event.preventDefault();
-    if ($('input:radio', this).is(':checked')) {
+    if ($("input:radio", this).is(':checked')) {
          //console.log("selected"); 
         } else {
-        alert('Please select something!');
+        alert("Please select something!");
         return false;}
     //var buttonName = $(event.currentTarget.closest('li')).attr(itemDataAttr);
+
     var buttonID = $('input[name="aButton"]:checked').attr("id");
     console.log(buttonID);
 
     });
+
+   
 
   /* $('button.next-button').on('click', function(event) {
     event.preventDefault();
