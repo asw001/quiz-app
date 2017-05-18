@@ -35,7 +35,7 @@ function makeQuiz (questionNumbers, qAs) {
 
     this.setCurrentQA = function () {
         this.currentQuestion = this.qa.shift();
-        this.setAnswered();
+        //this.setAnswered();
     };
     
     this.addScore = function () {
@@ -44,6 +44,7 @@ function makeQuiz (questionNumbers, qAs) {
 };
 
 function writeQandA(quiz) {
+  quiz.setCurrentQA();  
   var question = quiz.currentQuestion["question"];  
   var answers = quiz.currentQuestion["answers"];
   var answersProcessed = Object.keys(answers).map(function(key){
@@ -52,6 +53,7 @@ function writeQandA(quiz) {
   var qaHTML = '<p>' + question + '</p>' + answersProcessed.join("\n");
   $(".question-section").html(qaHTML); 
   $("#answer-form").find(':input:disabled').prop('disabled',false);
+
 }
 
 /*function handleAnswer(qaObj) {
@@ -78,20 +80,22 @@ function handleAnswer(quiz) {
 
 function handleQuestion(quiz) {
     
-   if (quiz.getQuestionsAnswered() <= quiz.getQuestionTotal()) {
     $("div.control-button").on("click", "button.next-button", function() {
-        //var currentQA = quiz.getQuestionAnswer();
+        event.stopPropagation();
+        event.preventDefault();
+        quiz.setAnswered();  
+
+        if (quiz.answered <= quiz.questionsTotal) {
         writeQandA(quiz);
-        //$("#answer-form").find(':input:disabled').prop('disabled',false);
-        console.log("This is total" + quiz.getQuestionTotal());
-        console.log("This is answered" + quiz.getQuestionsAnswered());
-        //quiz.setAnswered();
-        //return currentQA;
-    }); }
-   else {
+        console.log("answered: " + quiz.answered); 
+        }
+
+        else {
         alert("No more questions. You can go now.");
-    };
-};
+        };
+
+    }); };
+   
 
 
 function init() {
