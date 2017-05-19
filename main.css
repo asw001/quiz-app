@@ -61,12 +61,12 @@ margin: 3px;
 position: relative;
 }*/
 
-.correctChoice {
+.choiceRight {
 background-color: green;
 
 }
 
-.incorrectChoice {
+.choiceWrong {
 background-color: red;
 
 }

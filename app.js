@@ -71,13 +71,13 @@ function handleAnswer(quiz) {
            } else {
            alert("Please select something!");
            return false;}
-
          var buttonID = $('input[name="aButton"]:checked').attr("id");
 
          if (buttonID === quiz.currentQuestion["answerKey"]) {
-         console.log("answer correct"); }
+          $('input[name="aButton"]:checked').closest("div").addClass("choiceRight");
+        }
          else {
-            console.log("nope");
+          $('input[name="aButton"]:checked').closest("div").addClass("choiceWrong");
          }
          $("#answer-form").find(':input:not(:disabled)').prop('disabled',true);
     }); 
