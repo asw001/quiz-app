@@ -26,16 +26,16 @@ function makeQuiz (questionNumbers, qAs) {
     this.qa = getQAs(questionNumbers, questionAndAnswers);
 
     this.correct = 0;
-    this.answered = 0;
+    this.asked = 0;
     
-    this.setAnswered = function () {
-        this.answered++;
+    this.setasked = function () {
+        this.asked++;
     };
     this.currentQuestion = {};
 
     this.setCurrentQA = function () {
         this.currentQuestion = this.qa.shift();
-        //this.setAnswered();
+        //this.setasked();
     };
     
     this.addScore = function () {
@@ -56,10 +56,31 @@ function writeQandA(quiz) {
 
 }
 
-/*function handleAnswer(qaObj) {
-  var answerKey = qaObj['answerKey'];
+function formSelectAlert() {
+  if ($("input:radio", this).is(':checked')) {
+      } 
+  else {
+      alert("Please select something!");
+           return false; }
+};
 
-}*/
+function resetForm() {
+  $("#answer-form > div").attr('class', function(i, c){
+          return c.replace(/choice/g, '');
+           });
+};
+
+function writeAnswer(selection, currentAnswer,quiz) {
+  if (selection === currentAnswer) {
+          $('input[name="aButton"]:checked').closest("div").addClass("choiceRight");
+          quiz.addScore();
+        }
+         else {
+          $('input[name="aButton"]:checked').closest("div").addClass("choiceWrong");
+          $('#' + currentAnswer).closest("div").addClass("choiceRight");
+         }
+
+}
 
 function handleAnswer(quiz) {
 
@@ -67,24 +88,22 @@ function handleAnswer(quiz) {
         event.stopPropagation();
         event.preventDefault();
         
-        $("#answer-form > div").attr('class', function(i, c){
-              return c.replace(/choice/g, '');
-           });
-
         if ($("input:radio", this).is(':checked')) {
            } else {
            alert("Please select something!");
            return false;}
-         var buttonID = $('input[name="aButton"]:checked').attr("id");
+         var selection = $('input[name="aButton"]:checked').attr("id");
          var currentAnswer = quiz.currentQuestion["answerKey"];
-         console.log(currentAnswer);
-         if (buttonID === currentAnswer) {
+         writeAnswer(selection, currentAnswer);
+
+         /*if (selection === currentAnswer) {
           $('input[name="aButton"]:checked').closest("div").addClass("choiceRight");
+          quiz.addScore();
         }
          else {
           $('input[name="aButton"]:checked').closest("div").addClass("choiceWrong");
           $('#' + currentAnswer).closest("div").addClass("choiceRight");
-         }
+         }*/
          $("#answer-form").find(':input:not(:disabled)').prop('disabled',true);
     }); 
 };
@@ -94,20 +113,20 @@ function handleQuestion(quiz) {
     $("div.control-button").on("click", "button.next-button", function() {
         event.stopPropagation();
         event.preventDefault();
-        quiz.setAnswered();  
+        quiz.setAsked();  
 
-        if (quiz.answered <= quiz.questionsTotal) {
+        if (quiz.asked <= quiz.questionsTotal) {
         writeQandA(quiz);
-        console.log("answered: " + quiz.answered); 
+        console.log("asked: " + quiz.asked); 
         }
 
         else {
         alert("No more questions. You can go now.");
         };
-
-        $("#answer-form > div").attr('class', function(i, c){
+        resetForm();
+        /*$("#answer-form > div").attr('class', function(i, c){
               return c.replace(/choice/g, '');
-           });
+           });*/
 
     }); };
    
@@ -167,7 +186,7 @@ $("#answer-form").on("submit", function(event) {
    //console.log(quiz.answers)
   });*/
 
-//console.log(quiz.getQuestionsAnswered());
+//console.log(quiz.getQuestionsasked());
 //console.log(quiz.getQuestionTotal());
 handleGetNextQuestionAndAnswers(quiz);
 
