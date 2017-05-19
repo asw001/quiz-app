@@ -76,12 +76,14 @@ function handleAnswer(quiz) {
            alert("Please select something!");
            return false;}
          var buttonID = $('input[name="aButton"]:checked').attr("id");
-
-         if (buttonID === quiz.currentQuestion["answerKey"]) {
+         var currentAnswer = quiz.currentQuestion["answerKey"];
+         console.log(currentAnswer);
+         if (buttonID === currentAnswer) {
           $('input[name="aButton"]:checked').closest("div").addClass("choiceRight");
         }
          else {
           $('input[name="aButton"]:checked').closest("div").addClass("choiceWrong");
+          $('#' + currentAnswer).closest("div").addClass("choiceRight");
          }
          $("#answer-form").find(':input:not(:disabled)').prop('disabled',true);
     }); 
@@ -102,6 +104,10 @@ function handleQuestion(quiz) {
         else {
         alert("No more questions. You can go now.");
         };
+
+        $("#answer-form > div").attr('class', function(i, c){
+              return c.replace(/choice/g, '');
+           });
 
     }); };
    
