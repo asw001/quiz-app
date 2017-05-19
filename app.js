@@ -67,6 +67,10 @@ function handleAnswer(quiz) {
         event.stopPropagation();
         event.preventDefault();
         
+        $("#answer-form > div").attr('class', function(i, c){
+              return c.replace(/choice/g, '');
+           });
+
         if ($("input:radio", this).is(':checked')) {
            } else {
            alert("Please select something!");
