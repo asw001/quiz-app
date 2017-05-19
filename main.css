@@ -4,13 +4,7 @@ main {
 
 header {
 	background-color: #eebb44;
-	/*margin-bottom: 40px;*/
 }
-
-/*div	{
-
-	display: block;
-}*/
 
 .question-panel {
 	border: 5px solid lightgray;
@@ -20,8 +14,7 @@ header {
 }
 
 h1 {
-
-	text-align: center;
+    text-align: center;
 }
 .question-section {
 	margin: 20px;
@@ -39,7 +32,6 @@ h1 {
     position: absolute;
     left: 180px;
     bottom: 20px;
-
 }
 
 .answer-panel {
@@ -49,31 +41,34 @@ h1 {
 }
 
 .radio-button {
-border: 3px solid lightgray;
-margin: 3px;
-position: relative;
-margin-bottom: 10px;
+    border: 3px solid lightgray;
+    margin: 3px;
+    position: relative;
+    margin-bottom: 10px;
 }
 
-/*input[type=radio] {
-border: 3px solid lightgray;
-margin: 3px;
-position: relative;
-}*/
-
 .choiceRight {
-background-color: green;
-
+    background-color: green;
 }
 
 .choiceWrong {
-background-color: red;
-
+    background-color: red;
 }
 
 .score-panel {
     border: 5px solid lightgray;
-	height: 100px;
-	text-align: center;
+    height: 100px;
+    text-align: center;
+}
+
+.game-over {
+    size: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.span.score {
+    size: 30px;
+    font-weight: bold;
 
 }

@@ -71,6 +71,12 @@ var getQuestionNumbers = function(questionTotal) {
 
  };
 
+ function writeEnd() {
+    var endText = "<p>Game Over!</p></p>Thanks for playing</p>";
+     $(".question-section").addClass(".game-over");
+     $(".question-section").html(endText);
+ };
+
  function writeAnswer(selection, currentAnswer, quiz) {
      if (selection === currentAnswer) {
          $('input[name="aButton"]:checked').closest("div").addClass("choiceRight");
@@ -106,10 +112,11 @@ var getQuestionNumbers = function(questionTotal) {
          event.preventDefault();
          quiz.setAsked();
 
-         if (quiz.asked <= quiz.questionsTotal) {
-             writeQandA(quiz);
+         if (quiz.asked > quiz.questionsTotal) {
+             writeEnd();
          } else {
-             alert("No more questions. You can go now.");
+             writeQandA(quiz);
+             //alert("No more questions. You can go now.");
          };
          resetForm();
      });
